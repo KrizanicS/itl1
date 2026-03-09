@@ -1,0 +1,17 @@
+.ion-padding p {
+  margin: 8px 0;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: var(--ion-color-primary);
+}
+
+ion-card {
+  margin: 16px 0;
+}
+
+ion-item {
+  --padding-start: 0;
+  margin-bottom: 8px;
+}

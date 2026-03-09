@@ -41,7 +41,7 @@ Die Ionic App verbindet sich über eine PHP REST-API mit einer MySQL-Datenbank. 
 ┌─────────────────┐     HTTP      ┌─────────────────┐     PDO       ┌─────────────────┐
 │   Ionic App     │ ──────────▶  │    PHP API      │ ──────────▶  │     MySQL       │
 │   (Frontend)    │   JSON       │   (Backend)     │              │   (Database)    │
-│   Port: 3000    │ ◀──────────  │   Port: 8081    │ ◀──────────  │   Port: 3306    │
+│   Port: 8100    │ ◀──────────  │   Port: 8081    │ ◀──────────  │   Port: 3306    │
 └─────────────────┘              └─────────────────┘              └─────────────────┘
 ```
 
@@ -141,9 +141,76 @@ Alle Services werden über Docker Compose orchestriert:
 
 ---
 
-## 2. (Nächster Abschnitt)
+## 2. Node.js Backend mit JWT Authentifizierung
 
-*Hier kann der nächste Teil des Laborberichts dokumentiert werden.*
+### 2.1 Übersicht
+
+Umstellung des Backends von PHP auf **Node.js mit Express, Sequelize und Passport JWT**. Das System ermöglicht Benutzerregistrierung, Login und geschützte Routen.
+
+### 2.2 Architektur
+
+```
+┌─────────────────┐     HTTP      ┌─────────────────┐   Sequelize   ┌─────────────────┐
+│   Ionic App     │ ──────────▶  │  Node.js API    │ ──────────▶  │     MySQL       │
+│   (React/TSX)   │   JWT Token  │  (Express)      │              │   (Database)    │
+│   Port: 8100    │ ◀──────────  │   Port: 8081    │ ◀──────────  │   Port: 3306    │
+└─────────────────┘              └─────────────────┘              └─────────────────┘
+```
+
+### 2.3 Backend Struktur
+
+```
+api/
+├── index.js              # Express Server
+├── package.json          # Dependencies
+├── config/
+│   ├── database.js       # Sequelize Konfiguration
+│   └── passport.js       # JWT Strategie
+├── models/
+│   └── User.js           # User Model mit bcrypt
+└── routes/
+    └── auth.js           # Auth Endpoints
+```
+
+### 2.4 API Endpoints
+
+| Methode | Endpoint | Beschreibung |
+|---------|----------|--------------|
+| POST | /api/auth/register | Benutzer registrieren |
+| POST | /api/auth/login | Anmelden (JWT Token erhalten) |
+| GET | /api/auth/profile | Profil abrufen (JWT geschützt) |
+| PUT | /api/auth/profile | Profil aktualisieren (JWT geschützt) |
+
+### 2.5 Verwendete Technologien
+
+- **Express** - Web Framework
+- **Sequelize** - ORM für MySQL
+- **Passport + JWT** - Authentifizierung
+- **bcryptjs** - Passwort-Hashing
+
+### 2.6 Frontend Seiten (TSX)
+
+| Datei | Beschreibung |
+|-------|--------------|
+| Login.tsx | Login-Formular |
+| Register.tsx | Registrierungs-Formular |
+| Profile.tsx | Profil-Seite (geschützt) |
+| ApiService.ts | API-Kommunikation mit Token |
+
+### 2.7 Testen
+
+1. Docker starten:
+   ```bash
+   docker-compose up --build
+   ```
+
+2. Registrieren unter `http://localhost:8100/register`
+
+3. Login unter `http://localhost:8100/login`
+
+---
+
+## 3. (Nächster Abschnitt)
 
 ---
 
