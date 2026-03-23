@@ -6,7 +6,6 @@ import {
   IonTitle,
   IonToolbar,
   IonItem,
-  IonLabel,
   IonInput,
   IonButton,
   IonCard,
@@ -64,38 +63,42 @@ const Register: React.FC = () => {
             <h2 className="ion-text-center">Create Account</h2>
             
             <IonItem>
-              <IonLabel position="floating">Name *</IonLabel>
               <IonInput
+                label="Name *"
+                labelPlacement="floating"
                 type="text"
                 value={name}
-                onIonChange={(e) => setName(e.detail.value || '')}
+                onIonInput={(e) => setName(e.detail.value || '')}
               />
             </IonItem>
 
             <IonItem>
-              <IonLabel position="floating">Email *</IonLabel>
               <IonInput
+                label="Email *"
+                labelPlacement="floating"
                 type="email"
                 value={email}
-                onIonChange={(e) => setEmail(e.detail.value || '')}
+                onIonInput={(e) => setEmail(e.detail.value || '')}
               />
             </IonItem>
 
             <IonItem>
-              <IonLabel position="floating">Password *</IonLabel>
               <IonInput
+                label="Password *"
+                labelPlacement="floating"
                 type="password"
                 value={password}
-                onIonChange={(e) => setPassword(e.detail.value || '')}
+                onIonInput={(e) => setPassword(e.detail.value || '')}
               />
             </IonItem>
 
             <IonItem>
-              <IonLabel position="floating">Phone (optional)</IonLabel>
               <IonInput
+                label="Phone (optional)"
+                labelPlacement="floating"
                 type="tel"
                 value={phone}
-                onIonChange={(e) => setPhone(e.detail.value || '')}
+                onIonInput={(e) => setPhone(e.detail.value || '')}
               />
             </IonItem>
 
